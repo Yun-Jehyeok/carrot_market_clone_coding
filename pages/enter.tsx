@@ -1,14 +1,11 @@
-import { useState } from "react";
-
-function cls(...classnames: string[]) {
-  return classnames.join(" ");
-}
+import { useState } from 'react';
+import { cls } from '../libs/utils';
 
 export default function Enter() {
-  const [method, setMethod] = useState<"email" | "phone">("email");
+  const [method, setMethod] = useState<'email' | 'phone'>('email');
 
-  const onEmailClick = () => setMethod("email");
-  const onPhoneClick = () => setMethod("phone");
+  const onEmailClick = () => setMethod('email');
+  const onPhoneClick = () => setMethod('phone');
 
   return (
     <div className="mt-16 px-4">
@@ -19,10 +16,10 @@ export default function Enter() {
           <div className="grid border-b mt-8 w-full grid-cols-2 gap-16">
             <button
               className={cls(
-                "pb-4 font-medium border-b-2",
-                method === "email"
-                  ? "border-orange-500 text-orange-400"
-                  : "border-transparent text-gray-500"
+                'pb-4 font-medium border-b-2',
+                method === 'email'
+                  ? 'border-orange-500 text-orange-400'
+                  : 'border-transparent text-gray-500',
               )}
               onClick={onEmailClick}
             >
@@ -30,10 +27,10 @@ export default function Enter() {
             </button>
             <button
               className={cls(
-                "pb-4 font-medium border-b-2",
-                method === "phone"
-                  ? "border-orange-500 text-orange-400"
-                  : "border-transparent text-gray-500"
+                'pb-4 font-medium border-b-2',
+                method === 'phone'
+                  ? 'border-orange-500 text-orange-400'
+                  : 'border-transparent text-gray-500',
               )}
               onClick={onPhoneClick}
             >
@@ -43,11 +40,11 @@ export default function Enter() {
         </div>
         <form className="flex flex-col mt-8">
           <label htmlFor="input" className="text-sm font-medium text-gray">
-            {method === "email" ? "Email address" : null}
-            {method === "phone" ? "Phone number" : null}
+            {method === 'email' ? 'Email address' : null}
+            {method === 'phone' ? 'Phone number' : null}
           </label>
           <div className="mt-2">
-            {method === "email" ? (
+            {method === 'email' ? (
               <input
                 id="input"
                 type="email"
@@ -55,7 +52,7 @@ export default function Enter() {
                 required
               />
             ) : null}
-            {method === "phone" ? (
+            {method === 'phone' ? (
               <div className="flex rounded-md shadow-sm">
                 <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm">
                   +82
@@ -70,8 +67,8 @@ export default function Enter() {
             ) : null}
           </div>
           <button className="mt-5 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none">
-            {method === "email" ? "Get login link" : null}
-            {method === "phone" ? "Get one-time password" : null}
+            {method === 'email' ? 'Get login link' : null}
+            {method === 'phone' ? 'Get one-time password' : null}
           </button>
         </form>
         <div className="mt-8">
