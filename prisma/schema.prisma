@@ -2,12 +2,16 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  // planet scale은 vitess를 사용하고 vitess는 외래키의 존재 여부에 대한 확인을 하지 않아 에러를 출력하지 않는다.
+  // 그렇기 때문에 prisma에서 외래키에 대한 에러를 잡도록 세팅해준다.
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma" // 여기서 외래키 에러는 prisma에서 잡는다고 설정하는것
 }
 
 model User {
