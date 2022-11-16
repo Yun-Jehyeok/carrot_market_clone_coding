@@ -11,7 +11,7 @@ generator client {
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma" // 여기서 외래키 에러는 prisma에서 잡는다고 설정하는것
+  referentialIntegrity = "prisma"
 }
 
 model User {
