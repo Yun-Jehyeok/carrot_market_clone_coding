@@ -23,3 +23,5 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt // 유저가 업데이트 될 때마다 변하는 값이라고 명시
 }
+
+// pscale connect carrot-market
