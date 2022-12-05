@@ -17,3 +17,8 @@ export default function withHandler(
     }
   };
 }
+
+export interface ResponseType {
+  ok: boolean;
+  [key: string]: any;
+}

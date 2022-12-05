@@ -1,37 +1,35 @@
 import client from "libs/server/client";
-import withHandler from "libs/server/withHandler";
+import withHandler, { ResponseType } from "libs/server/withHandler";
 import { NextApiRequest, NextApiResponse } from "next";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseType>
+) {
   const { phone, email } = req.body;
+  const user = phone ? { phone: +phone } : email ? { email } : null;
 
-  const payload = phone ? { phone: +phone } : { email };
+  if (!user) return res.status(400).json({ ok: false });
 
-  const user = await client.user.upsert({
-    create: {
-      ...payload,
-      name: "Anonymous",
-    },
-    update: {},
-    where: {
-      ...payload,
-    },
-  });
-
-  console.log(user);
+  const payload = Math.floor(100000 + Math.random() * 900000) + "";
 
   const token = await client.token.create({
     data: {
-      payload: "aa",
+      payload,
       user: {
-        connect: {
-          id: user.id,
+        connectOrCreate: {
+          where: {
+            ...user,
+          },
+          create: {
+            ...user,
+            name: "Anonymous",
+          },
         },
       },
     },
   });
 
-  console.log(token);
   return res.json({ ok: true });
 }
 
