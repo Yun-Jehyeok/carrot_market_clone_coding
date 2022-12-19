@@ -36,25 +36,34 @@ async function handler(
     },
   });
 
-  if (phone) {
-    const message = await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_MSID,
-      to: process.env.MY_PHONE!,
-      body: `Your login token is ${payload}`,
-    });
+  // if (phone) {
+  //   const message = await twilioClient.messages.create({
+  //     messagingServiceSid: process.env.TWILIO_MSID,
+  //     to: process.env.MY_PHONE!,
+  //     body: `Your login token is ${payload}`,
+  //   });
 
-    console.log(message);
-  } else if (email) {
-    const email = await mail.send({
-      from: "dbswpgur2@naver.com",
-      to: "cjswo35753@gmail.com",
-      subject: "Your Carrot Market Verification Email",
-      text: `Your token is ${payload}`,
-      html: `<strong>Your token is ${payload}</strong>`,
-    });
+  //   console.log(message);
+  // } else if (email) {
+  //   const mailOptions = {
+  //     from: process.env.MAIL_ID,
+  //     to: email,
+  //     subject: "Your Carrot Market Verification Email",
+  //     html: `Your token is <strong>${payload}</strong>`,
+  //   };
 
-    console.log(email);
-  }
+  //   const result = await smtpTransport.sendMail(mailOptions, (err, res) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       console.log(res);
+  //     }
+
+  //     smtpTransport.close();
+  //   });
+
+  //   console.log(result);
+  // }
 
   return res.json({ ok: true });
 }
