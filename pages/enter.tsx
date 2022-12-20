@@ -3,7 +3,8 @@ import Input from "components/input";
 import useMutation from "libs/client/useMutation";
 import { cls } from "libs/client/utils";
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface EnterForm {
@@ -48,6 +49,14 @@ const Enter: NextPage = () => {
     if (tokenLoading) return;
     confirmToken(validForm);
   };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push("/");
+    }
+  }, [tokenData, router]);
 
   return (
     <div className="mt-16 px-4">
@@ -116,7 +125,7 @@ const Enter: NextPage = () => {
                   register={register("phone")}
                   name="phone"
                   label="Phone number"
-                  type="number"
+                  type="text"
                   kind="phone"
                   required
                 />
