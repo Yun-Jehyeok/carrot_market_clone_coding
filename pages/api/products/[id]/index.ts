@@ -1,3 +1,4 @@
+import client from "libs/server/client";
 import withHandler, { ResponseType } from "libs/server/withHandler";
 import { withApiSession } from "libs/server/withSession";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -7,7 +8,7 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { id } = req.query;
-  const product = await client?.product.findUnique({
+  const product = await client.product.findUnique({
     where: {
       id: Number(id),
     },
@@ -26,7 +27,7 @@ async function handler(
       contains: word,
     },
   }));
-  const relatedProducts = await client?.product.findMany({
+  const relatedProducts = await client.product.findMany({
     where: {
       OR: terms,
       AND: {
